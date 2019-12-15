@@ -31,6 +31,7 @@ public class PropertyController {
 
     @RequestMapping("admin_property_delete")
     public String delete(int id) {
+        //提前获取为了重定向
         Property p = propertyService.get(id);
         propertyService.delete(id);
         return "redirect:admin_property_list?cid="+p.getCid();
@@ -54,17 +55,15 @@ public class PropertyController {
     @RequestMapping("admin_property_list")
     public String list(int cid, Model model,  Page page) {
         Category c = categoryService.get(cid);
-
         PageHelper.offsetPage(page.getStart(),page.getCount());
         List<Property> ps = propertyService.list(cid);
-
         int total = (int) new PageInfo<>(ps).getTotal();
         page.setTotal(total);
         page.setParam("&cid="+c.getId());
 
-        model.addAttribute("ps", ps);
-        model.addAttribute("c", c);
-        model.addAttribute("page", page);
+        model.addAttribute("ps",ps);
+        model.addAttribute("c",c);
+        model.addAttribute("page",page);
 
         return "admin/listProperty";
     }

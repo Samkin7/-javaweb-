@@ -40,6 +40,12 @@
             <mvc:mapping path="/fore*"/>
             <bean class="com.tmall.interceptor.OtherInterceptor"/>
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin*"/>
+            <bean class="com.tmall.interceptor.AdminLoginInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
+
+
 
 </beans>

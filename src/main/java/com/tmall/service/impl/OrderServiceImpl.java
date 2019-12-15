@@ -4,6 +4,7 @@ import com.tmall.mapper.OrderMapper;
 import com.tmall.pojo.Order;
 import com.tmall.pojo.OrderExample;
 import com.tmall.pojo.OrderItem;
+import com.tmall.pojo.User;
 import com.tmall.service.OrderItemService;
 import com.tmall.service.OrderService;
 import com.tmall.service.UserService;
@@ -67,7 +68,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> list(){
         OrderExample example =new OrderExample();
         example.setOrderByClause("id desc");
-        return orderMapper.selectByExample(example);
+        List<Order> result = orderMapper.selectByExample(example);
+        setUser(result);
+        return result;
 
     }
 
@@ -77,6 +80,16 @@ public class OrderServiceImpl implements OrderService {
         example.createCriteria().andUidEqualTo(uid).andStatusNotEqualTo(excludedStatus);
         example.setOrderByClause("id desc");
         return orderMapper.selectByExample(example);
+    }
+
+    public void setUser(List<Order> os){
+        for (Order o : os)
+            setUser(o);
+    }
+    public void setUser(Order o){
+        int uid = o.getUid();
+        User u = userService.get(uid);
+        o.setUser(u);
     }
 
 

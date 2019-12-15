@@ -34,12 +34,13 @@ public class Order {
 
 
     /*如下是非数据库字段*/
+    //该订单下的订单项列表
     private List<OrderItem> orderItems;
-
+    //该订单对应的用户
     private User user;
-
+    //该订单的总计金额
     private float total;
-
+    //该订单的总计数量
     private int totalNumber;
 
     public Integer getId() {

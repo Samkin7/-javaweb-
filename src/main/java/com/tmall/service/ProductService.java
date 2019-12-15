@@ -24,4 +24,6 @@ public interface ProductService {
     void setSaleAndReviewNumber(List<Product> ps);
 
     List<Product> search(String keyword);
+
+    void setProductSingleImages(Product p);
 }

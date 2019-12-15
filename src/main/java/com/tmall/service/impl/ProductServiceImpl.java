@@ -76,6 +76,8 @@ public class ProductServiceImpl implements ProductService {
             ProductImage pi = pis.get(0);
             p.setFirstProductImage(pi);
         }
+
+
     }
 
     @Override
@@ -120,12 +122,21 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> search(String keyword) {
         ProductExample example = new ProductExample();
-        example.createCriteria().andNameLike("%" + keyword + "%");
+        example.createCriteria().andNameEqualTo("%"+keyword+"%");
         example.setOrderByClause("id desc");
-        List result = productMapper.selectByExample(example);
-        setFirstProductImage(result);
-        setCategory(result);
-        return result;
+        List<Product> ps = productMapper.selectByExample(example);
+        setFirstProductImage(ps);
+
+        return ps;
+
+    }
+
+    @Override
+    public void setProductSingleImages(Product p) {
+        List<ProductImage> productSingleImages = productImageService.list(p.getId(), ProductImageService.type_single);
+        p.setProductSingleImages(productSingleImages);
+        List<ProductImage> productDetailImages = productImageService.list(p.getId(), ProductImageService.type_detail);
+        p.setProductDetailImages(productDetailImages);
     }
 
     @Override

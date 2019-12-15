@@ -94,10 +94,12 @@ public class ForeController {
     public String product( int pid, Model model) {
         Product p = productService.get(pid);
 
-        List<ProductImage> productSingleImages = productImageService.list(p.getId(), ProductImageService.type_single);
-        List<ProductImage> productDetailImages = productImageService.list(p.getId(), ProductImageService.type_detail);
-        p.setProductSingleImages(productSingleImages);
-        p.setProductDetailImages(productDetailImages);
+        //List<ProductImage> productSingleImages = productImageService.list(p.getId(), ProductImageService.type_single);
+        //List<ProductImage> productDetailImages = productImageService.list(p.getId(), ProductImageService.type_detail);
+        //p.setProductSingleImages(productSingleImages);
+
+        //p.setProductDetailImages(productDetailImages);
+        productService.setProductSingleImages(p);
 
         List<PropertyValue> pvs = propertyValueService.list(p.getId());
         List<Review> reviews = reviewService.list(p.getId());
@@ -377,6 +379,11 @@ public class ForeController {
 
         return "redirect:forereview?oid="+oid+"&showonly=true";
     }
+
+
+
+
+
 
 }
 

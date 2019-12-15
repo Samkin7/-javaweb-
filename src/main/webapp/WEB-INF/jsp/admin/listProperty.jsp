@@ -51,7 +51,6 @@
 					<td><a deleteLink="true"
 						   href="admin_property_delete?id=${p.id}"><span
 							class=" 	glyphicon glyphicon-trash"></span></a></td>
-
 				</tr>
 			</c:forEach>
 			</tbody>
